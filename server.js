@@ -4,6 +4,10 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
+var logger = require('morgan');
+var mongoose = require('mongoose');
+var handlebars = require('express-handlebars');
+var methodOverride = require('method-override');
 
 app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.json());

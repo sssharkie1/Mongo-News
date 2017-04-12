@@ -35,6 +35,9 @@
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.5",
     "mongojs": "^2.4.0",
-    "request": "^2.74.0"
+    "mongoose": "^4.9.3",
+    "morgan": "^1.8.1",
+    "request": "^2.74.0",
+    "method-override": "^2.3.8"
   }
 }
