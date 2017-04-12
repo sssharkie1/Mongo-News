@@ -1,0 +1,29 @@
+<div class="container">
+  <!-- scraped content -->
+  <h1 id="comicsHeader">Fake News is Alive!</h1>
+  {{#each results}}
+    <div class="article">
+      <a href="{{this.link}}" target="_blank"><h4 class="article-title text-xs-center">{{this.title}}</h4></a>
+      <div class="row">
+      </div>
+      <div class="comments">
+        <div class="text-xs-center button" data-id="{{this._id}}">
+
+          <div class="form-group row">
+            <label for="comment" class="col-form-label">Care to comment?</label>
+            <div>
+              <input class="form-control text-xs-center" type="text" id="comment">
+            </div>
+          <ul class="list-group list-group-flush {{this._id}}">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  {{/each}}
+</div>
+
+<script type="text/javascript" src="/scripts/app.js"></script>
+
+</div>
