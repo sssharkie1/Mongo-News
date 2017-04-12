@@ -21,8 +21,8 @@ require("./controllers/controller.js")(app);
 //port
 var PORT = 3000 || process.env.PORT;
 
-//mongoose.connect('');
-//var db = mongoose.connection;
+mongoose.connect('mongodb://heroku_6gwc42b2:8vecedubm8dsdnofvbllvcqnue@ds159330.mlab.com:59330/heroku_6gwc42b2');
+var db = mongoose.connection;
 
 // LISTENER:
 app.listen(PORT, function(){
