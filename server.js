@@ -23,7 +23,7 @@ app.set('view engine', 'handlebars');
 require("./controllers/controller.js")(app);
 
 //port
-var PORT = 3000 || process.env.PORT;
+var PORT = 3000 //|| process.env.PORT;
 
 mongoose.connect('mongodb://heroku_6gwc42b2:8vecedubm8dsdnofvbllvcqnue@ds159330.mlab.com:59330/heroku_6gwc42b2');
 var db = mongoose.connection;

@@ -19,7 +19,7 @@ db.on('error', function(err) {
 db.articles.findOne({}, function(err, data) {
   if (data === null) {
     var options = {
-      url: 'http://waterfordwhispersnews.com/',
+      url: 'http://weeklyworldnews.com/',
       headers: {
         'User-Agent': 'request'
       }
@@ -30,20 +30,11 @@ db.articles.findOne({}, function(err, data) {
       var results = [];
       var $ = cheerio.load(html);
       $('article').each(function(i, element) {
-        var title = $(this).find('h2').text().trim();
-        var summary = $(this).find('p').text().trim();
-        var link = $(this).children('a').attr('href');
-        console.log(link)
-
-
-          var obj = {
-            title: title,
-            summary: summary,
-            link: link
-          };
-          results.push(obj);
-
-      }); 
+        var title = $(this).find('h1.entry-title').text().trim();
+        var link = $(this).find('a').attr('href');
+        // console.log(link)
+        //not storing image URLs that are undefined
+      }); // END $.each
 
       db.articles.insert(results, function(err, data) {
         if (err) throw err;
@@ -52,11 +43,13 @@ db.articles.findOne({}, function(err, data) {
   }
 });
 
+// routes to export to server.js
 module.exports = function(app) {
 
   app.get('/', function(req, res) {
     db.articles.find({}, function(err, data) {
       if (err) throw err;
+      // console.log(data)
       res.render('index', {
         results: data
       });
@@ -67,6 +60,7 @@ module.exports = function(app) {
     // add comments to the database using ObjectId
     var id = req.body._id;
     var comment = req.body.comment;
+    // console.log(req.body)
     db.articles.update({
       "_id": mongojs.ObjectId(id)
     }, {
@@ -79,6 +73,8 @@ module.exports = function(app) {
         "_id": mongojs.ObjectId(id)
       }, function(err, data) {
         if (err) throw err;
+        // console.log(data)
+        //send comments back to front-end
         res.json(data);
       });
     });
@@ -89,6 +85,7 @@ module.exports = function(app) {
     // delete comments by searching database using the ObjectId
     var id = req.body._id;
     var comment = req.body.comment;
+    // console.log(req.body)
     db.articles.update({
       "_id": mongojs.ObjectId(id)
     }, {
@@ -101,7 +98,8 @@ module.exports = function(app) {
         "_id": mongojs.ObjectId(id)
       }, function(err, data) {
         if (err) throw err;
-
+        // console.log(data)
+        //send comments back to front-end
         res.json(data);
       });
     });
@@ -111,11 +109,12 @@ module.exports = function(app) {
   // get comments for specific articles based on :id in the URL
   app.get('/comment/:id', function(req, res) {
     var id = req.params.id;
+    // console.log(id)
     db.articles.find({
       "_id": id
     }, function(err, data) {
       if (err) throw err;
-
+      // console.log(data)
     });
   });
 };
